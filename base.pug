@@ -1,0 +1,46 @@
+doctype html
+html(lang="ko")
+    head
+        title #{pageTitle} | Wetube
+        //- #{} = 변수 안 써주면 걍 text
+        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+    body
+        header
+            h1=pageTitle
+            //- h1=pagetitle ↶태그 하나의 변수 값만 집어넣을 때
+            //- =
+            //- h1 #{pageTitle} ↶변수를 text와 섞게 됐을 때
+            nav
+                ul 
+                    li 
+                        a(href="/videos/upload") Upload Video
+        main 
+            block content
+        //- pug file이 내용을 채워넣을 공간을 마련.
+        //- block: 템블릿의 창문
+        //- 무언가를 집어/채워 넣을 수 있는 곳
+        //- *블록 이름은 똑같이 설정
+    include partials/footer.pug
+    //- upload 할 때마다 각 pug 파일에 가서 수정하면 귀찮 → upload 할 폴더 만듬.(footer.pug)
+    //- include: 다른 파일을 포함 해줌
+
+//- home, watch, edit file을 확장할거임
+//- inheritance(상속) 배울거야
+//- 상속: 일종의 base를 만들어줘
+
+
+//- pug = template engine
+//- 템블릿을 이용해서 뷰를 만드는걸 돕는것
+//- 뷰는 유저가 보는 대상
+
+//- 1. pug 설치
+//- npm run pug
+//- 2. pug를 view engine으로 설정
+//- app.set("view engine", "pug");
+//- 3. pug	file 생성
+
+//- pug file 유저에게 보내기
+//-  작성 파일 → pug(렌더링해서 html로 변화) → user
+
+//- import 필요 ✕
+//- express가 view 디렉토리에서 pug file을 찾도록 설정됨.

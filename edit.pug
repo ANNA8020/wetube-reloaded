@@ -1,0 +1,14 @@
+extends base.pug
+
+block content
+    h4 Change Title of video
+    form(method="POST")
+        input(name="title", placeholder="Video Title", value=video.title, required)
+        //- required 제목이 비어있으면 Save 할 수 없도록 해줌
+        input(value="Save", type="submit")
+//- *모든 input에 name 너주기
+
+//- get request / post request 차이점
+//- get: 기본값으로 method는 GET(data 받는 목적)
+//-  ↪ ex. 구글, 네이버에서 뭔가를 검색했을 때
+//- post: database를 바꿀 data를 보내거나, file을 보낼 때

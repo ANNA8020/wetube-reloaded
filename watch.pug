@@ -1,0 +1,19 @@
+extends base.pug
+
+block content
+    h3 #{video.views} #{video.views === 1 ? "view" : "views"}
+    //- ternary operate
+    a(href=`${video.id}/edit`) Edit Video &rarr;
+    //- #{videos.id} = +videos.id = `${video.id}/eidt`
+    //-   ↪ attribute 사용 ✕           ↪ 변수를 이용으로 인해 사용
+
+//- absoulte / relative url 차이점
+//- a(href="edit")
+//- ↪ relative url
+    //- url 끝 부분만 바뀜
+//- a(href="/edit")
+//- ↪ absoulte url
+    //- root + url
+
+//- &rarr →
+//- &larr ←

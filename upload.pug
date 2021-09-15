@@ -1,0 +1,7 @@
+extends base.pug
+//- base의 모든 걸 받기 위해서 해줌
+
+block content 
+    form(method="POST", action="/videos/upload")
+        input(placeholder="Title", required, type="text", name="title")
+        input(type="submit", value="Upload Video")
