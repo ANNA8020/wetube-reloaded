@@ -2,6 +2,11 @@ extends base.pug
 //- base의 모든 걸 받기 위해서 해줌
 
 block content 
-    form(method="POST", action="/videos/upload")
-        input(placeholder="Title", required, type="text", name="title")
+    if errorMessage
+        span=errorMessage
+    form(method="POST")
+        input(placeholder="Title", required, type="text", name="title", manlength=80)
+        input(placeholder="Description", required, type="text", name="description", minlength=20)
+        //- 사용자와 해당코드 연결 잘 해줘야해 (error 발생할 수도 있움)
+        input(placeholder="Hashtags, separated by comma." required, type="text", name="hashtags")
         input(type="submit", value="Upload Video")

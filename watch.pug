@@ -1,8 +1,9 @@
 extends base.pug
 
 block content
-    h3 #{video.views} #{video.views === 1 ? "view" : "views"}
-    //- ternary operate
+    div
+        p=video.description
+        small=video.createdAt 
     a(href=`${video.id}/edit`) Edit Video &rarr;
     //- #{videos.id} = +videos.id = `${video.id}/eidt`
     //-   ↪ attribute 사용 ✕           ↪ 변수를 이용으로 인해 사용

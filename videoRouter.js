@@ -11,9 +11,12 @@ postUpload,
 
 const videoRouter = express.Router();
 
-videoRouter.get("/:id(\\d+)", watch);
-videoRouter.route("/:id(\\d+)/edit").get(getEdit).post(postEdit);
+videoRouter.get("/:id([1-9a-f]{24})", watch);
+videoRouter.route("/:id([1-9a-f]{24})/edit").get(getEdit).post(postEdit);
 videoRouter.route("/upload").get(getUpload).post(postUpload);
+// Regular Expression로 인해 영상의 id가 발생하는데 이유는 mongodb id 포맷과 맞지 않아서 그래
+// 해결 1: (//d+) ← 이 code 제거
+// 해결 2: hexadecimal(16진법)을 쓰기
 
 // 정규직: 문자열로부터 특정 정보를 추츨해내는 방법
 // 모든 프로그램 언어에 존재⤴
