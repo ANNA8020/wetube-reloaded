@@ -1,23 +1,7 @@
 import Video from "../models/Video";
 
-/*
-console.log("Start");
-Video.find({}, error, vidoes) => {
-    if(error){
-        return res.render("server-error")
-    }
-    return res.render("home", {pageTitle; "Home", videos});
-});
-console.log("Finished")
-*/
-// Video.find({}, (error, videos) => {});
-// {} ← mongoose가 database를 불러옴
-//  ↪ 반응 → function 실행 → (mongoose가)error, videos 불러옴
-// 특정 코드를 마지막에 실행
-
 export const home = async (req, res) => {
     const videos = await Video.find({});
-    console.log(videos);
     return res.render("home", { pageTitle: "Home", videos });
     // database 검색 시작, 종료가 이루어지면 render 시작
 };
@@ -30,20 +14,46 @@ export const watch = async (req, res) => {
     const { id } = req.params;
     // router가 주는 express의 기능
     const video = await Video.findById(id);
+    if(!video){
+    // video not found
+        return res.render("404", { pageTitle: "Video not found." });
+    }
     return res.render("watch", { pageTitle: video.title, video });
-};
+    };
 // 하나의 비디오만 볼 수 있게 수정
 // 비디오 upload
 // video = video:video
 // ↪ video object를 만든거야﹗
-export const getEdit = (req, res) => {
+
+export const getEdit =async (req, res) => {
     const { id } = req.params;
-    return res.render("edit", { pageTitle: `Editing` });
+    const video = await Video.findById(id);
+    // eidt 템플릿에 video object를 보내야 하기 때문에 exists Ⅹ
+    if(!video) {
+        return res.render("404", { pageTItle: "Video not found" })
+    }
+    return res.render("edit", { pageTitle: `Edit ${video.title}`, video });
 };
 // 이 코드는 from을 화면에 보여줌
-export const postEdit = (req,res) => {
+
+export const postEdit = async (req,res) => {
     const { id } = req.params;
-    const { title } = req.body;
+    const { title, description, hashtags } = req.body;
+    const video = await Video.exists({ _id: id });
+    // video = database에서 검색한 영상 object
+    // exits는 id만 불러오는거야 전에는 video object를 가져왔잖아 하지만 굳이 그렇게 할 필요 Ⅹ
+    //  ↪ 영상 존재 확인을 위한 것 
+    // exits(): 필더를 필요로 하고 영상의 어떤 속성도 필터 가능
+    if(!video) {
+        return res.render("404", { pageTItle: "Video not found" })
+    }
+    await Video.findByIdAndUpdate(id, {
+        // Video = 내가 만든 영상 Model
+        title,
+        description,
+        hashtags: Video.formatHashtags(hashtags),
+    });
+    // 두개의 argument 필요
     return res.redirect(`/videos/${id}`);
 };
 // 이 코드는 변경사항을 저장해줌
@@ -58,11 +68,11 @@ export const postUpload = async (req, res) => {
         await Video.create({
             title,
             description,
-            hashtags: hashtags.split(",").map((word) => `#${word}`),
+            hashtags: Video.formatHashtags(hashtags),
         });
         return res.redirect("/");
     }   catch (error) {
-        return res.render("Upload", { 
+        return res.render("upload", { 
             pageTitle: "Upload Video",
             errorMessage: error._message,
          });
