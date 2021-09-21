@@ -5,7 +5,8 @@ watch,
 getUpload,
 getEdit,
 postEdit,
-postUpload, 
+postUpload,
+deleteVideo
 } from "../controllers/videoController";
 // request object: request에 대한 정보를 담고 있음.
 
@@ -13,6 +14,7 @@ const videoRouter = express.Router();
 
 videoRouter.get("/:id([1-9a-f]{24})", watch);
 videoRouter.route("/:id([1-9a-f]{24})/edit").get(getEdit).post(postEdit);
+videoRouter.route("/:id([1-9a-f]{24})/delete").get(deleteVideo);
 videoRouter.route("/upload").get(getUpload).post(postUpload);
 // Regular Expression로 인해 영상의 id가 발생하는데 이유는 mongodb id 포맷과 맞지 않아서 그래
 // 해결 1: (//d+) ← 이 code 제거

@@ -1,4 +1,4 @@
-extends base.pug
+extends base
 
 block content
     div
@@ -7,6 +7,8 @@ block content
     a(href=`${video.id}/edit`) Edit Video &rarr;
     //- #{videos.id} = +videos.id = `${video.id}/eidt`
     //-   ↪ attribute 사용 ✕           ↪ 변수를 이용으로 인해 사용
+    br
+    a(href=`${video.id}/delete`) Delete Video &rarr;
 
 //- absoulte / relative url 차이점
 //- a(href="edit")

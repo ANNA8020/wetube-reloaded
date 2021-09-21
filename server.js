@@ -4,7 +4,7 @@ import express from "express";
 // node_modules에서 express 찾기
 import morgan from "morgan";
 // npm i morgan 설치하기
-import globalRouter from "./routers/globalRouter";
+import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
 // 1. import  2. export
@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 // extended
 //  ↪ body에 있는 정보들을 보기 좋게 형식을 갖춰주는 일을 함
 // *설치해주기 전에 middleware를 먼저 사용해줘야 함
-app.use("/", globalRouter);
+app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 
