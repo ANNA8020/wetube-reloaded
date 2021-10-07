@@ -12,6 +12,7 @@
     "build:server": "babel src -d build",
     "build:assets": "webpack --mode=production",
     "dev": "nodemon --exec babel-node src/init.js",
+    "assets": "webpack --config webpack.config.js",
     "dev:assets": "webpack --mode=development -w"
   },
   "author": "Anna",
@@ -35,6 +36,6 @@
     "babel-loader": "^8.2.2",
     "nodemon": "^2.0.12",
     "webpack": "^5.57.1",
-    "webpack-cli": "^4.8.0"
+    "webpack-cli": "^4.9.0"
   }
 }
