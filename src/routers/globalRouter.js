@@ -1,24 +1,24 @@
 import express from "express";
 // .js file에 각각 import 해주기.
 // 독립되어 있으니까 ⤴
-import { getJoin, postJoin, login } from "../controllers/userController";
+import {join, login} from "../controllers/userController";
 import { home, search } from "../controllers/videoController";
 // 여러 개를 export 할 떄 object로 묶어서 작성.
 
-const rootRouter = express.Router();
+const globalRouter = express.Router();
 // global router 
 
-rootRouter.get("/", home);
+globalRouter.get("/", home);
 // 쩡이냥 usrs → "/" url 접속
 // express가 global router 안에 들어감
 // express가 안에서 url 나머지 주소를 찾아.
 // / + /
+globalRouter.get("/join", join);
+globalRouter.get("/login", login);
+globalRouter.get("search", search);
 // URL은 함수의 이름과 꼭 같을 필요는 없음
-rootRouter.route("/join").get(getJoin).post(postJoin);
-rootRouter.get("/login", login);
-rootRouter.get("/search", search)
 
-export default rootRouter;
+export default globalRouter;
 // *모든 파일은 분리된 모듈 → 무언가를 바깥에 공유 → export 해주기
 // 변수만 import 하고 싶다?
 // ↪ default export 해주면 ㄲㅡㅌ
