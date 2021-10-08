@@ -34,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 // extended
 //  ↪ body에 있는 정보들을 보기 좋게 형식을 갖춰주는 일을 함
 // *설치해주기 전에 middleware를 먼저 사용해줘야 함
+app.use("/assets", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
