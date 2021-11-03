@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 // import 해줌으로 mongo에 연결됨
 
-mongoose.connect("mongodb://127.0.0.1:27017/wetube", {
+mongoose.connect("mongodb+srv://anna:flZo7NcNc0gh97IH@cluster0.tza83.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+    // password: flZo7NcNc0gh97IH,
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // useFindAndModify: false,
