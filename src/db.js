@@ -6,6 +6,7 @@ mongoose.connect("mongodb+srv://anna:flZo7NcNc0gh97IH@cluster0.tza83.mongodb.net
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // useFindAndModify: false,
+    // userCreateIndex: true,
 });
 // mongoose는 wetube라는 mongodb database로 연결해줄거야
 
